@@ -1,0 +1,7 @@
+# Bytecode
+target/
+
+# Eclipse Files
+.classpath
+.project
+.settings/
