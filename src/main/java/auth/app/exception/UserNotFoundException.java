@@ -7,5 +7,9 @@ public class UserNotFoundException extends RuntimeException {
 	public UserNotFoundException() {
 		super("Unknown username & password");
 	}
+	
+	public UserNotFoundException (String message) {
+		super(message);
+	}
 
 }
