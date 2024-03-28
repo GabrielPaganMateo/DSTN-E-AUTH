@@ -1,12 +1,14 @@
 package auth.app.interfase.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import auth.app.entity.User;
 import auth.app.exception.UserNotFoundException;
 import auth.app.interfase.UserRepository;
 import auth.app.interfase.UserService;
 
+@Service
 public class UserServiceImpl implements UserService {
 
 	@Autowired
