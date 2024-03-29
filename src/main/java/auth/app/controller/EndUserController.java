@@ -8,44 +8,44 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import auth.app.entity.User;
-import auth.app.exception.UserNotFoundException;
+import auth.app.entity.EndUser;
+import auth.app.exception.EndUserNotFoundException;
 import auth.app.interfase.JwtGenerator;
-import auth.app.interfase.UserService;
+import auth.app.interfase.EndUserService;
 
 @RestController
 @RequestMapping("/user")
-public class UserController {
+public class EndUserController {
 
 	@Autowired
-	private UserService userService;
+	private EndUserService userService;
 	
 	@Autowired
 	private JwtGenerator jwtGenerator;
 	
 	@PostMapping("/register")
-	public ResponseEntity<?> register(@RequestBody User user){
+	public ResponseEntity<?> register(@RequestBody EndUser user){
 		try {
 			userService.saveUser(user);
-			return new ResponseEntity<User>(user, HttpStatus.CREATED);
+			return new ResponseEntity<EndUser>(user, HttpStatus.CREATED);
 		} catch (Exception e) {
 			return new ResponseEntity<String>(e.getMessage(), HttpStatus.CONFLICT);
 		}
 	}
 	
 	@PostMapping("/login")
-	public ResponseEntity<?> login(@RequestBody User user) {
+	public ResponseEntity<?> login(@RequestBody EndUser user) {
 		try {
 			if (user.getUserName() == null) {
-				throw new UserNotFoundException("Username is empty");
+				throw new EndUserNotFoundException("Username is empty");
 			} else if (user.getPassword() == null) {
-				throw new UserNotFoundException("Password is empty");
+				throw new EndUserNotFoundException("Password is empty");
 			}
-			User userData = userService.getUserByNameAndPassword(user.getUserName(), user.getPassword());
+			EndUser userData = userService.getUserByNameAndPassword(user.getUserName(), user.getPassword());
 			if (userData == null) {
-				throw new UserNotFoundException();
+				throw new EndUserNotFoundException();
 			}
-			return new ResponseEntity<>(jwtGenerator.generateJwt(user), HttpStatus.OK);
+			return new ResponseEntity<>(jwtGenerator.generateJwt(userData), HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<String>(e.getMessage(), HttpStatus.CONFLICT);
 		}

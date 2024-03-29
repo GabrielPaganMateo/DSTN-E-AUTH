@@ -1,4 +1,4 @@
 # JWT MS Tutorial
 https://springframework.guru/jwt-authentication-in-spring-microservices-jwt-token/
-*Next, start "Test The Controller Endpoints, begin "BlogService""
-*Need to remove CSRF from /register endpoint by configuring spring security
+*Create Postman requests for AUTH
+*Create BlogService (Actual service that I want to show users after logging in)

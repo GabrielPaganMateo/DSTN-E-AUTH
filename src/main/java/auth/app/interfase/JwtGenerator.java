@@ -2,8 +2,8 @@ package auth.app.interfase;
 
 import java.util.Map;
 
-import auth.app.entity.User;
+import auth.app.entity.EndUser;
 
 public interface JwtGenerator {
-	Map<String, String> generateJwt(User user);
+	Map<String, String> generateJwt(EndUser user);
 }
