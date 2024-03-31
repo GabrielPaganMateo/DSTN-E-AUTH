@@ -1,4 +1,4 @@
 # JWT MS Tutorial
 https://springframework.guru/jwt-authentication-in-spring-microservices-jwt-token/
-*Create Postman requests for AUTH
 *Create BlogService (Actual service that I want to show users after logging in)
+*Download and Use DBeaver instead of PGAdmin for DB management
