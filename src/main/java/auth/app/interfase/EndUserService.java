@@ -8,5 +8,6 @@ import auth.app.exception.EndUserNotFoundException;
 @Service
 public interface EndUserService {
 	public void saveUser(EndUser user);
-	public EndUser getUserByNameAndPassword(String name, String password) throws EndUserNotFoundException;
+	public EndUser getUserByUserNameAndPassword(String userName, String password) throws EndUserNotFoundException;
+	public EndUser getUserByUserName(String userName);
 }

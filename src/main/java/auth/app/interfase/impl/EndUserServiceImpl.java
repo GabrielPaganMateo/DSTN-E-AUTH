@@ -8,7 +8,6 @@ import auth.app.exception.EndUserNotFoundException;
 import auth.app.interfase.EndUserRepository;
 import auth.app.interfase.EndUserService;
 
-@Service
 public class EndUserServiceImpl implements EndUserService {
 
 	@Autowired
@@ -20,8 +19,17 @@ public class EndUserServiceImpl implements EndUserService {
 	}
 
 	@Override
-	public EndUser getUserByNameAndPassword(String name, String password) throws EndUserNotFoundException {
-		EndUser user = userRepository.findByUserNameAndPassword(name, password);
+	public EndUser getUserByUserNameAndPassword(String userName, String password) throws EndUserNotFoundException {
+		EndUser user = userRepository.findByUserNameAndPassword(userName, password);
+		if (user == null) {
+			throw new EndUserNotFoundException();
+		}
+		return user;
+	}
+	
+	@Override
+	public EndUser getUserByUserName(String userName) {
+		EndUser user = userRepository.findByUserName(userName);
 		if (user == null) {
 			throw new EndUserNotFoundException();
 		}
