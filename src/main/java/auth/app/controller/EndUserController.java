@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import auth.app.entity.EndUser;
 import auth.app.exception.EndUserNotFoundException;
-import auth.app.interfase.JwtGenerator;
-import auth.app.security.PasswordHandler;
-import auth.app.interfase.EndUserService;
+import auth.app.service.EndUserService;
+import auth.app.service.JwtGenerator;
+import auth.app.service.PasswordHash;
 
 @RestController
 @RequestMapping("/user")
@@ -24,10 +24,13 @@ public class EndUserController {
 	@Autowired
 	private JwtGenerator jwtGenerator;
 	
+	@Autowired
+	private PasswordHash passwordHash;
+	
 	@PostMapping("/register")
 	public ResponseEntity<?> register(@RequestBody EndUser user){
 		try {
-			user.setPassword(PasswordHandler.hashPassword(user.getPassword()));
+			user.setPassword(passwordHash.hashPassword(user.getPassword()));
 			userService.saveUser(user);
 			return new ResponseEntity<EndUser>(user, HttpStatus.CREATED);
 		} catch (Exception e) {
@@ -44,7 +47,7 @@ public class EndUserController {
 				throw new EndUserNotFoundException("Password is empty");
 			}
 			EndUser userData = userService.getUserByUserName(user.getUserName());
-			if (userData == null || !PasswordHandler.verifyPassword(user.getPassword(), userData.getPassword())) {
+			if (userData == null || !passwordHash.verifyPassword(user.getPassword(), userData.getPassword())) {
 				throw new EndUserNotFoundException();
 			}
 			return new ResponseEntity<>(jwtGenerator.generateJwt(userData), HttpStatus.OK);

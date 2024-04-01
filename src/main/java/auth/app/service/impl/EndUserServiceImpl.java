@@ -1,13 +1,14 @@
-package auth.app.interfase.impl;
+package auth.app.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import auth.app.entity.EndUser;
 import auth.app.exception.EndUserNotFoundException;
-import auth.app.interfase.EndUserRepository;
-import auth.app.interfase.EndUserService;
+import auth.app.service.EndUserRepository;
+import auth.app.service.EndUserService;
 
+@Service
 public class EndUserServiceImpl implements EndUserService {
 
 	@Autowired
