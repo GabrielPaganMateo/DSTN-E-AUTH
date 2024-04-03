@@ -23,4 +23,12 @@ public class EndUser {
 	private UUID id;
 	private String userName;
 	private String password;
+	
+	public EndUserDTO EndUserToDTO() {
+		EndUserDTO userData = new EndUserDTO();
+		userData.setId(this.getId());
+		userData.setUserName(this.getUserName());
+		return userData;
+	}
+
 }
