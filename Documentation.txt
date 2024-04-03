@@ -1,6 +1,5 @@
 # JWT MS Tutorial
 https://springframework.guru/jwt-authentication-in-spring-microservices-jwt-token/
-*Add email verification feature
-*improve usage of DTO, make two methods .toDTO and .toSecureDTO, one will have password and the other won't, add these methods to login and register appropiately.
+*Add email verification feature, use AWS SES (Email Service)
 *Create BlogService (Actual service that I want to show users after logging in)
 *Download and Use DBeaver instead of PGAdmin for DB management

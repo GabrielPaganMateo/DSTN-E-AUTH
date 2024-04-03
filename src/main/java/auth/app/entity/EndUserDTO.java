@@ -10,8 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class EndUserDTO {
-
 	private UUID id;
 	private String userName;
-
+	private String password;
 }

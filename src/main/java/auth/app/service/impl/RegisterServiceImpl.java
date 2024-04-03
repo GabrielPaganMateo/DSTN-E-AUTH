@@ -1,12 +1,13 @@
 package auth.app.service.impl;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import auth.app.entity.EndUser;
-import auth.app.entity.EndUserDTO;
 import auth.app.service.EndUserService;
 import auth.app.service.PasswordHash;
 import auth.app.service.RegisterService;
@@ -25,8 +26,8 @@ public class RegisterServiceImpl implements RegisterService {
 		try {
 			userData.setPassword(passwordHash.hashPassword(userData.getPassword()));
 			endUserService.saveUser(userData);
-			EndUserDTO userDataDTO = userData.EndUserToDTO();
-			return new ResponseEntity<EndUserDTO>(userDataDTO, HttpStatus.CREATED);
+			Map<String, String> userDataMap = endUserService.toSecureMap(userData);
+			return new ResponseEntity<Map<String, String>>(userDataMap, HttpStatus.CREATED);
 		} catch (Exception e) {
 			return new ResponseEntity<String>(e.getMessage(), HttpStatus.CONFLICT);
 		}

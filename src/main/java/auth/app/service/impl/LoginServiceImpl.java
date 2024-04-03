@@ -20,7 +20,7 @@ public class LoginServiceImpl implements LoginService {
 	PasswordHash passwordHash;
 	
 	@Autowired
-	EndUserService userService;
+	EndUserService endUserService;
 	
 	@Autowired
 	JwtGenerator jwtGenerator;
@@ -33,11 +33,11 @@ public class LoginServiceImpl implements LoginService {
 			} else if (userInput.getPassword() == null) {
 				throw new EndUserNotFoundException("Password is empty");
 			}
-			EndUser endUser = userService.getUserByUserName(userInput.getUserName());
+			EndUser endUser = endUserService.getUserByUserName(userInput.getUserName());
 			if (endUser == null || !passwordHash.verifyPassword(userInput.getPassword(), endUser.getPassword())) {
 				throw new EndUserNotFoundException();
 			}
-			EndUserDTO endUserDTO = endUser.EndUserToDTO();
+			EndUserDTO endUserDTO = endUserService.toDTO(endUser);
 			return new ResponseEntity<>(jwtGenerator.generateJwt(endUserDTO), HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<String>(e.getMessage(), HttpStatus.CONFLICT);
