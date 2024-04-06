@@ -28,12 +28,12 @@ public class LoginServiceImpl implements LoginService {
 	@Override
 	public ResponseEntity<?> userLogin(EndUser userInput) {
 		try {
-			if (userInput.getUserName() == null) {
-				throw new EndUserNotFoundException("Username is empty");
+			if (userInput.getEmail() == null) {
+				throw new EndUserNotFoundException("Email is empty");
 			} else if (userInput.getPassword() == null) {
 				throw new EndUserNotFoundException("Password is empty");
 			}
-			EndUser endUser = endUserService.getUserByUserName(userInput.getUserName());
+			EndUser endUser = endUserService.getUserByEmail(userInput.getEmail());
 			if (endUser == null || !passwordHash.verifyPassword(userInput.getPassword(), endUser.getPassword())) {
 				throw new EndUserNotFoundException();
 			}

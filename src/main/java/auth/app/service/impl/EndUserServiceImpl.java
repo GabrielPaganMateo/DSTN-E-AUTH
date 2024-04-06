@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import auth.app.entity.EndUser;
 import auth.app.entity.EndUserDTO;
 import auth.app.exception.EndUserNotFoundException;
-import auth.app.service.EndUserRepository;
+import auth.app.repository.EndUserRepository;
 import auth.app.service.EndUserService;
 
 @Service
@@ -24,8 +24,8 @@ public class EndUserServiceImpl implements EndUserService {
 	}
 
 	@Override
-	public EndUser getUserByUserNameAndPassword(String userName, String password) throws EndUserNotFoundException {
-		EndUser user = userRepository.findByUserNameAndPassword(userName, password);
+	public EndUser getUserByEmailAndPassword(String userName, String password) throws EndUserNotFoundException {
+		EndUser user = userRepository.findByEmailAndPassword(userName, password);
 		if (user == null) {
 			throw new EndUserNotFoundException();
 		}
@@ -33,8 +33,8 @@ public class EndUserServiceImpl implements EndUserService {
 	}
 	
 	@Override
-	public EndUser getUserByUserName(String userName) {
-		EndUser user = userRepository.findByUserName(userName);
+	public EndUser getUserByEmail(String email) {
+		EndUser user = userRepository.findByEmail(email);
 		if (user == null) {
 			throw new EndUserNotFoundException();
 		}
@@ -45,7 +45,7 @@ public class EndUserServiceImpl implements EndUserService {
 	public EndUserDTO toDTO(EndUser user) {
 		EndUserDTO userData = new EndUserDTO();
 		userData.setId(user.getId());
-		userData.setUserName(user.getUserName());
+		userData.setEmail(user.getEmail());
 		userData.setPassword(user.getPassword());
 		return userData;
 	}
@@ -53,7 +53,7 @@ public class EndUserServiceImpl implements EndUserService {
 	@Override
 	public Map<String, String> toSecureMap(EndUser user) {
 		Map<String, String> userData = new HashMap<String, String>();
-		userData.put("userName", user.getUserName());
+		userData.put("email", user.getEmail());
 		userData.put("id", user.getId().toString());
 		return userData;
 	}

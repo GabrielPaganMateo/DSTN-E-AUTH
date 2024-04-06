@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class EndUserDTO {
 	private UUID id;
-	private String userName;
+	private String email;
 	private String password;
 }

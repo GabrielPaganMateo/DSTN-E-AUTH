@@ -10,6 +10,6 @@ public interface EndUserService {
 	public Map<String, String> toSecureMap(EndUser user);
 	public EndUserDTO toDTO(EndUser user);
 	public void saveUser(EndUser user);
-	public EndUser getUserByUserNameAndPassword(String userName, String password) throws EndUserNotFoundException;
-	public EndUser getUserByUserName(String userName);
+	public EndUser getUserByEmailAndPassword(String userName, String password) throws EndUserNotFoundException;
+	public EndUser getUserByEmail(String userName);
 }

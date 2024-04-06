@@ -1,12 +1,13 @@
 package auth.app.entity;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -19,15 +20,18 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class EndUser {
+public class VerificationToken {
 	@Id
 	@GeneratedValue(generator = "UUID")
 	@GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
 	private UUID id;
-	@Column(nullable = false, unique = true)
-	private String email;
-	private String password;
 	private boolean isVerified;
-    @OneToOne(mappedBy = "endUser", cascade = CascadeType.ALL)
-    private VerificationToken verificationToken;
+	private LocalDateTime issuedDate;
+	private LocalDateTime expirationDate;
+	private LocalDateTime confirmedDate;
+	private UUID token;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "end_user_id")
+	EndUser endUser;
+
 }
