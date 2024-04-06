@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import auth.app.entity.EndUser;
 import auth.app.entity.EndUserDTO;
-import auth.app.exception.EndUserNotFoundException;
+import auth.app.exception.EndUserException;
 import auth.app.repository.EndUserRepository;
 import auth.app.service.EndUserService;
 
@@ -20,14 +20,17 @@ public class EndUserServiceImpl implements EndUserService {
 	
 	@Override
 	public void saveUser(EndUser user) {
+		if (userRepository.existsByEmail(user.getEmail())) {
+			throw new EndUserException("Email already registered");
+		}
 		userRepository.save(user);
 	}
 
 	@Override
-	public EndUser getUserByEmailAndPassword(String userName, String password) throws EndUserNotFoundException {
+	public EndUser getUserByEmailAndPassword(String userName, String password) throws EndUserException {
 		EndUser user = userRepository.findByEmailAndPassword(userName, password);
 		if (user == null) {
-			throw new EndUserNotFoundException();
+			throw new EndUserException();
 		}
 		return user;
 	}
@@ -36,7 +39,7 @@ public class EndUserServiceImpl implements EndUserService {
 	public EndUser getUserByEmail(String email) {
 		EndUser user = userRepository.findByEmail(email);
 		if (user == null) {
-			throw new EndUserNotFoundException();
+			throw new EndUserException();
 		}
 		return user;
 	}

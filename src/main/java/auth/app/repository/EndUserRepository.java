@@ -11,4 +11,5 @@ import auth.app.entity.EndUser;
 public interface EndUserRepository extends JpaRepository<EndUser, UUID>{
 	public EndUser findByEmailAndPassword(String email, String password);
 	public EndUser findByEmail(String email);
+	public boolean existsByEmail(String email);
 }

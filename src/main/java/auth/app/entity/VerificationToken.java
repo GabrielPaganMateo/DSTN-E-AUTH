@@ -32,6 +32,6 @@ public class VerificationToken {
 	private UUID token;
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "end_user_id")
-	EndUser endUser;
+	private EndUser endUser;
 
 }
