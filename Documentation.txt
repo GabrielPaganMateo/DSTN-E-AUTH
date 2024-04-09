@@ -1,6 +1,10 @@
 # JWT MS Tutorial
 https://springframework.guru/jwt-authentication-in-spring-microservices-jwt-token/
+*(configure aws cli and aws ses in cdk
 *Add email verification feature, use AWS SES (Email Service) https://hellokoding.com/email-verification-example-with-spring-boot-mysql-docker-compose/
-as part of the process i am going to remove the usernme attribute and instead make the user use an email, Right now I am at Create ServicesS
+as part of the process i am going to remove the usernme attribute and instead make the user use an email that must be verified, Right now I am at Create ServicesS
+*Instead of using PostgreSQL and JPA repositories I want to use DynamoDB to store user object information and the verification tokens as well (I recently learned that
+SQL databases are only ideal when the stored data must be analyzed across multiple tables but when only when one table is necessary amd no analysis of data is required
+ then DynamoDB is a much better option
 *Create BlogService (Actual service that I want to show users after logging in)
 *Download and Use DBeaver instead of PGAdmin for DB management
